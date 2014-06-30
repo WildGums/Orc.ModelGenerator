@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.ModelGenerator", "Orc.ModelGenerator\Orc.ModelGenerator.csproj", "{B1F61D56-87A8-4E6C-8CF2-530E332672C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.ModelGenerator.Wpf", "Orc.ModelGenerator.Wpf\Orc.ModelGenerator.Wpf.csproj", "{DF006AC4-93F4-4714-B533-280FEB1E37B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{B1F61D56-87A8-4E6C-8CF2-530E332672C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1F61D56-87A8-4E6C-8CF2-530E332672C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1F61D56-87A8-4E6C-8CF2-530E332672C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF006AC4-93F4-4714-B533-280FEB1E37B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF006AC4-93F4-4714-B533-280FEB1E37B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF006AC4-93F4-4714-B533-280FEB1E37B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF006AC4-93F4-4714-B533-280FEB1E37B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

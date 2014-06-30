@@ -13,7 +13,7 @@ namespace Orc.ModelGenerator
         [Test]
         public void GeneralTest()
         {
-            
+//            var modelGenerator = new Generator("test");
         }
     }
 }

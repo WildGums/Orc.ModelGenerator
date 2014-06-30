@@ -33,6 +33,12 @@
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.2\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -45,12 +51,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityCodeGenerators\ClassGenerator.cs" />
+    <Compile Include="EntityCodeGenerators\CsvMapGeneratorGenerator.cs" />
+    <Compile Include="EntityCodeGenerators\EntityCodeGenerator.cs" />
+    <Compile Include="DataFile.cs" />
+    <Compile Include="DataFileType.cs" />
+    <Compile Include="DataProviders\DataProvider.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityCodeGenerators\RepositoryReaderGenerator.cs" />
+    <Compile Include="EntityCodeGenerators\RepositoryUnitTestGenerator.cs" />
+    <Compile Include="EntityProperty.cs" />
+    <Compile Include="DataProviders\CsvDataProvider.cs" />
+    <Compile Include="DataProviders\ExcelDataProvider.cs" />
     <Compile Include="ModelGeneratorTest.cs" />
-    <Compile Include="ModelGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
