@@ -28,10 +28,19 @@ namespace Orc.ModelGenerator.DataProviders
                 for (int i = 0; i < headers.Length; i++)
                 {
                     var header = headers[i];
-                    entity.Properties.Add(new EntityProperty(header, DetectType(csvReader.CurrentRecord[i])));
+                    entity.Properties.Add(new EntityProperty(CreateFieldName(header), DetectType(csvReader.CurrentRecord[i])));
                 }
                 yield return entity;
             }
+        }
+
+        private string CreateFieldName(string header)
+        {
+            if (header.IndexOfAny(new[] {'|'}) != -1)
+            {
+                return header.Substring(0, header.IndexOfAny(new[] { '|' }));
+            }
+            return header;
         }
 
         private Type DetectType(string stringValue)
