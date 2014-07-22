@@ -16,4 +16,15 @@ namespace Orc.ModelGenerator
 
         public bool IsEnabled { get; set; }
     }
+
+    public class CsvEntity:Entity
+    {
+        public CsvEntity(string name, string fileName)
+            : base(name)
+        {
+            FileName = fileName;
+        }
+
+        public string FileName { get; set; }
+    }
 }

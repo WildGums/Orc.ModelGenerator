@@ -23,7 +23,7 @@ namespace Orc.ModelGenerator.DataProviders
             {
                 csvReader.Read();
                 var headers = csvReader.FieldHeaders;
-                var entity = new Entity(entityName);
+                var entity = new CsvEntity(entityName, _dataFile.FileName);
 
                 for (int i = 0; i < headers.Length; i++)
                 {
