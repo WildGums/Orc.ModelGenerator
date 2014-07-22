@@ -4,7 +4,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
     {
         public override string Generate(Entity entity)
         {
-            return string.Format(
+            var outputString = string.Format(
                 @"
 
 private const string {0}sCsv = @""TODO.csv"";
@@ -18,6 +18,8 @@ public {0}[] Load{0}s()
 }}
 ",
                 entity.Name);
+
+            return outputString;
         }
     }
 }

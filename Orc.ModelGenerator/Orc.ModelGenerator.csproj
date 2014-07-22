@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Catel.Core">
+      <HintPath>..\packages\Catel.Core.3.9.0\lib\net45\Catel.Core.dll</HintPath>
+    </Reference>
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
@@ -63,6 +66,7 @@
     <Compile Include="EntityProperty.cs" />
     <Compile Include="DataProviders\CsvDataProvider.cs" />
     <Compile Include="DataProviders\ExcelDataProvider.cs" />
+    <Compile Include="GeneratorResult.cs" />
     <Compile Include="ModelGeneratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

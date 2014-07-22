@@ -7,7 +7,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
         public override string Generate(Entity entity)
         {
             var properties = GetUnitTestRowsCode(entity);
-            return string.Format(
+            var outputString = string.Format(
                 @"[TestMethod]
 public void Load{0}s()
 {{
@@ -21,6 +21,8 @@ public void Load{0}s()
 }}
 ",
                 entity.Name, properties);
+
+            return outputString;
         }
 
         private string GetUnitTestRowsCode(Entity entity)

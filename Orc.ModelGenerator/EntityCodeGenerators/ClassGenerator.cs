@@ -7,13 +7,15 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
         public override string Generate(Entity entity)
         {
             var properties = GetPropertiesCode(entity);
-            return string.Format(
+            var outputString = string.Format(
                 @"
 public class {0}
 {{
 {1}}}
 ",
                 entity.Name, properties);
+
+            return outputString;
         }
 
         private string GetPropertiesCode(Entity entity)

@@ -18,6 +18,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private string _output;
+        private ObservableCollection<GeneratorResult> _outputItems = new ObservableCollection<GeneratorResult>();
         private ClassGenerator _classGenerator = new ClassGenerator();
         private CsvMapGeneratorGenerator _csvMapGenerator = new CsvMapGeneratorGenerator();
         private RepositoryReaderGenerator _repositoryReaderGenerator = new RepositoryReaderGenerator();
@@ -62,6 +63,11 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
                 _output = value;
                 RaisePropertyChanged(() => Output);
             }
+        }
+
+        public ObservableCollection<GeneratorResult> OutputItems
+        {
+            get { return _outputItems; }
         }
 
         // TODO: Register models with the vmpropmodel codesnippet
@@ -109,19 +115,30 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
 
         private void OnRun()
         {
+            OutputItems.Clear();
+
             var entities = Entities.Where(x => x.IsEnabled);
 
-            var sb = new StringBuilder();
-            foreach (var entity in entities)
-                sb.AppendLine(_classGenerator.Generate(entity));
-            foreach (var entity in entities)
-                sb.AppendLine(_csvMapGenerator.Generate(entity));
-            foreach (var entity in entities)
-                sb.AppendLine(_repositoryReaderGenerator.Generate(entity));
-            foreach (var entity in entities)
-                sb.AppendLine(_repositoryUnitTestGenerator.Generate(entity));
-
-            Output = sb.ToString();
+            OutputItems.Add(new GeneratorResult
+            {
+                Title = "Class",
+                OutputString = string.Join("\n", entities.Select(x => _classGenerator.Generate(x))),
+            });
+            OutputItems.Add(new GeneratorResult
+            {
+                Title = "CsvMaps",
+                OutputString = string.Join("\n", entities.Select(x => _csvMapGenerator.Generate(x))),
+            });
+            OutputItems.Add(new GeneratorResult
+            {
+                Title = "Repository",
+                OutputString = string.Join("\n", entities.Select(x => _repositoryReaderGenerator.Generate(x))),
+            });
+            OutputItems.Add(new GeneratorResult
+            {
+                Title = "Unit tests",
+                OutputString = string.Join("\n", entities.Select(x => _repositoryUnitTestGenerator.Generate(x))),
+            });
         }
 
         #endregion

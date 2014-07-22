@@ -7,7 +7,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
         public override string Generate(Entity entity)
         {
             var properties = GetMapRowsCode(entity);
-            return string.Format(
+            var outputString = string.Format(
                 @"
 public sealed class {0}Map: CsvClassMap<{0}>
 {{
@@ -17,6 +17,8 @@ public sealed class {0}Map: CsvClassMap<{0}>
 }}
 ",
                 entity.Name, properties);
+
+            return outputString;
         }
 
         private string GetMapRowsCode(Entity entity)
