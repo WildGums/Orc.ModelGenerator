@@ -15,25 +15,11 @@
 			<RowDefinition Height="*" />
 		</catel:StackGrid.RowDefinitions>
         <catel:StackGrid.ColumnDefinitions>
+            <ColumnDefinition Width="200px" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="250px" />
         </catel:StackGrid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0">
-            <TabControl ItemsSource="{Binding OutputItems}">
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
-                    </DataTemplate>
-                </TabControl.ItemTemplate>
-                <TabControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBox Text="{Binding OutputString}" IsReadOnly="True"/>
-                    </DataTemplate>
-                </TabControl.ContentTemplate>
-            </TabControl>
-        </Grid>
-        <catel:StackGrid Grid.Row="0" Grid.Column="1">
+        <catel:StackGrid Grid.Row="0" Grid.Column="0">
             <catel:StackGrid.RowDefinitions>
                 <RowDefinition Height="30px" />
                 <RowDefinition Height="*" />
@@ -66,6 +52,21 @@
             </ListBox>
             <Button Content="Run!" Command="{Binding Run}"/>
         </catel:StackGrid>
-        
+         
+        <Grid Grid.Row="0" Grid.Column="1">
+            <TabControl ItemsSource="{Binding OutputItems}">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"/>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <TextBox Text="{Binding OutputString}" IsReadOnly="True"/>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+        </Grid>
+
     </catel:StackGrid>
 </catel:DataWindow>
