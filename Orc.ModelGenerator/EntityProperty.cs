@@ -6,12 +6,14 @@ namespace Orc.ModelGenerator
     {
         private readonly string _sourceName;
         private readonly Type _type;
+        private readonly string _testValue;
         private string _friendlyTypeName;
 
-        public EntityProperty(string name, Type type)
+        public EntityProperty(string name, Type type, string testValue)
         {
             _sourceName = name;
             _type = type;
+            _testValue = testValue;
             _friendlyTypeName = GetFriendlyTypeName(_type);
         }
 
@@ -20,6 +22,10 @@ namespace Orc.ModelGenerator
             get { return _friendlyTypeName; }
         }
 
+        public string TestValue
+        {
+            get { return _testValue; }
+        }
         public string SourceName
         {
             get { return _sourceName; }

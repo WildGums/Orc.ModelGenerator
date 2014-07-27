@@ -22,13 +22,14 @@ namespace Orc.ModelGenerator.DataProviders
             using (var csvReader = CreateCsvReader(_dataFile.FullFileName))
             {
                 csvReader.Read();
-                var headers = csvReader.FieldHeaders;
                 var entity = new CsvEntity(entityName, _dataFile.FileName);
 
+                var headers = csvReader.FieldHeaders;
                 for (int i = 0; i < headers.Length; i++)
                 {
                     var header = headers[i];
-                    entity.Properties.Add(new EntityProperty(CreateFieldName(header), DetectType(csvReader.CurrentRecord[i])));
+                    var records = csvReader.CurrentRecord[i];
+                    entity.Properties.Add(new EntityProperty(CreateFieldName(header), DetectType(records), records));
                 }
                 yield return entity;
             }

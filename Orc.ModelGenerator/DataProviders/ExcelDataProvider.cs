@@ -33,7 +33,7 @@ namespace Orc.ModelGenerator.DataProviders
             var entity = new Entity(CreateEntityName(table.TableName));
             foreach (DataColumn column in table.Columns)
             {
-                entity.Properties.Add(new EntityProperty(CreatePropertyName(column.ColumnName), column.DataType));
+                entity.Properties.Add(new EntityProperty(CreatePropertyName(column.ColumnName), column.DataType, null));
             }
             return entity;
         }
