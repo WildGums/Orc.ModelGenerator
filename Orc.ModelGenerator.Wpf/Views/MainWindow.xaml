@@ -57,12 +57,23 @@
             <TabControl ItemsSource="{Binding OutputItems}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title}"/>
+                        <TextBlock Text="{Binding GeneratorResult.Title}"/>
                     </DataTemplate>
                 </TabControl.ItemTemplate>
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <TextBox Text="{Binding OutputString}" IsReadOnly="True"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Button Grid.Row="0" Grid.Column="1" Content="Copy" Command="{Binding CopyActiveTabToBuffer}"/>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding GeneratorResult.OutputString}" IsReadOnly="True"/>
+                        </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>

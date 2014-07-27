@@ -18,7 +18,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private string _output;
-        private ObservableCollection<GeneratorResult> _outputItems = new ObservableCollection<GeneratorResult>();
+        private ObservableCollection<TabItemViewModel> _outputItems = new ObservableCollection<TabItemViewModel>();
         private ClassGenerator _classGenerator = new ClassGenerator();
         private CsvMapGeneratorGenerator _csvMapGenerator = new CsvMapGeneratorGenerator();
         private RepositoryReaderGenerator _repositoryReaderGenerator = new RepositoryReaderGenerator();
@@ -65,7 +65,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
             }
         }
 
-        public ObservableCollection<GeneratorResult> OutputItems
+        public ObservableCollection<TabItemViewModel> OutputItems
         {
             get { return _outputItems; }
         }
@@ -119,27 +119,29 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
 
             var entities = Entities.Where(x => x.IsEnabled);
 
-            OutputItems.Add(new GeneratorResult
+            OutputItems.Add(new TabItemViewModel(new GeneratorResult
             {
                 Title = "Class",
                 OutputString = string.Join("\n", entities.Select(x => _classGenerator.Generate(x))),
-            });
-            OutputItems.Add(new GeneratorResult
+            }));
+            OutputItems.Add(new TabItemViewModel(new GeneratorResult
             {
                 Title = "CsvMaps",
                 OutputString = string.Join("\n", entities.Select(x => _csvMapGenerator.Generate(x))),
-            });
-            OutputItems.Add(new GeneratorResult
+            }));
+            OutputItems.Add(new TabItemViewModel(new GeneratorResult
             {
                 Title = "Repository",
                 OutputString = string.Join("\n", entities.Select(x => _repositoryReaderGenerator.Generate(x))),
-            });
-            OutputItems.Add(new GeneratorResult
+            }));
+            OutputItems.Add(new TabItemViewModel(new GeneratorResult
             {
                 Title = "Unit tests",
                 OutputString = string.Join("\n", entities.Select(x => _repositoryUnitTestGenerator.Generate(x))),
-            });
+            }));
         }
+
+
 
         #endregion
     }
