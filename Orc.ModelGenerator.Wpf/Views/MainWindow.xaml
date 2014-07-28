@@ -4,22 +4,22 @@
 				  xmlns:catel="http://catel.codeplex.com"
 				  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 				  xmlns:modelGenerator="clr-namespace:Orc.ModelGenerator;assembly=Orc.ModelGenerator"
-				  ShowInTaskbar="True" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="Manual" WindowState="Normal">
+				  xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+				  ShowInTaskbar="True" ResizeMode="CanResize" SizeToContent="Manual" WindowStartupLocation="Manual" WindowState="Normal" Width="1024" Height="600">
     <!-- Resources -->
     <catel:DataWindow.Resources>
     </catel:DataWindow.Resources>
     
     <!-- Content -->
      <catel:StackGrid x:Name="LayoutRoot">
-		<catel:StackGrid.RowDefinitions>
-			<RowDefinition Height="*" />
-		</catel:StackGrid.RowDefinitions>
+
         <catel:StackGrid.ColumnDefinitions>
             <ColumnDefinition Width="200px" />
+            <ColumnDefinition Width="300px" />
             <ColumnDefinition Width="*" />
         </catel:StackGrid.ColumnDefinitions>
 
-        <catel:StackGrid Grid.Row="0" Grid.Column="0">
+        <catel:StackGrid>
             <catel:StackGrid.RowDefinitions>
                 <RowDefinition Height="30px" />
                 <RowDefinition Height="*" />
@@ -40,7 +40,7 @@
                 </i:Interaction.Triggers>
             </ListBox>
             <Label Content="Entities:" />
-            <ListBox ItemsSource="{Binding Entities}">
+            <ListBox ItemsSource="{Binding Entities}" SelectedItem="{Binding ActiveEntity}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -52,8 +52,12 @@
             </ListBox>
             <Button Content="Run!" Command="{Binding Run}"/>
         </catel:StackGrid>
+        
+        <Grid>
+            <xctk:PropertyGrid SelectedObject="{Binding ActiveEntity}" ShowSummary="False" ShowTitle="False" ShowSearchBox="False" ShowSortOptions="False" NameColumnWidth="100" />
+        </Grid>
          
-        <Grid Grid.Row="0" Grid.Column="1">
+        <Grid>
             <TabControl ItemsSource="{Binding OutputItems}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -72,7 +76,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Button Grid.Row="0" Grid.Column="1" Content="Copy" Command="{Binding CopyActiveTabToBuffer}"/>
-                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding GeneratorResult.OutputString}" IsReadOnly="True"/>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding GeneratorResult.OutputString}" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>

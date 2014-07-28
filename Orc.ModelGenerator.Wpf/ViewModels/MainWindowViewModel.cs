@@ -23,6 +23,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
         private CsvMapGeneratorGenerator _csvMapGenerator = new CsvMapGeneratorGenerator();
         private RepositoryReaderGenerator _repositoryReaderGenerator = new RepositoryReaderGenerator();
         private RepositoryUnitTestGenerator _repositoryUnitTestGenerator = new RepositoryUnitTestGenerator();
+        private Entity _activeEntity;
 
         #region Fields
         #endregion
@@ -53,6 +54,17 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
 
         public ObservableCollection<DataFile> InputFiles { get; private set; }
         public ObservableCollection<Entity> Entities { get; private set; }
+
+        public Entity ActiveEntity
+        {
+            get { return _activeEntity; }
+            set
+            {
+                if (_activeEntity == value) return;
+                _activeEntity = value;
+                RaisePropertyChanged(() => ActiveEntity);
+            }
+        }
 
         public string Output
         {

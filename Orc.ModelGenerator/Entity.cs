@@ -11,7 +11,7 @@ namespace Orc.ModelGenerator
             IsEnabled = true;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public List<EntityProperty> Properties { get; private set; }
 
         public bool IsEnabled { get; set; }
