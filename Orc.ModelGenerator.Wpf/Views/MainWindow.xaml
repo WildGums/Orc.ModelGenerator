@@ -40,7 +40,7 @@
                 </i:Interaction.Triggers>
             </ListBox>
             <Label Content="Entities:" />
-            <TreeView x:Name="EntityTreeView"  ItemsSource="{Binding Entities}" >
+            <TreeView x:Name="EntityTreeView"  ItemsSource="{Binding Entities}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectedItemChanged">
                         <catel:EventToCommand Command="{Binding ActiveEntityChanged}" CommandParameter="{Binding ElementName=EntityTreeView,Path=SelectedValue}"/>
@@ -54,7 +54,10 @@
                         </StackPanel>
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type modelGenerator:EntityProperty}" >
-                        <TextBlock Text="{Binding Path=Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text="{Binding Path=FriendlyTypeName}"/>
+                        </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>

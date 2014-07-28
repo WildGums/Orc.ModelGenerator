@@ -66,6 +66,7 @@
     <Compile Include="EntityProperty.cs" />
     <Compile Include="DataProviders\CsvDataProvider.cs" />
     <Compile Include="DataProviders\ExcelDataProvider.cs" />
+    <Compile Include="EntityPropertyType.cs" />
     <Compile Include="GeneratorResult.cs" />
     <Compile Include="ModelGeneratorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
