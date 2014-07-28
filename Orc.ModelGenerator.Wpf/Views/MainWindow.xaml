@@ -15,7 +15,7 @@
 
         <catel:StackGrid.ColumnDefinitions>
             <ColumnDefinition Width="200px" />
-            <ColumnDefinition Width="300px" />
+            <ColumnDefinition Width="250px" />
             <ColumnDefinition Width="*" />
         </catel:StackGrid.ColumnDefinitions>
 

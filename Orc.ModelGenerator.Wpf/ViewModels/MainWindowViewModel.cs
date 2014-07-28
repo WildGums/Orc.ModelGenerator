@@ -20,7 +20,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
         private string _output;
         private ObservableCollection<TabItemViewModel> _outputItems = new ObservableCollection<TabItemViewModel>();
         private ClassGenerator _classGenerator = new ClassGenerator();
-        private CsvMapGeneratorGenerator _csvMapGenerator = new CsvMapGeneratorGenerator();
+        private CsvMapGenerator _csvMapGenerator = new CsvMapGenerator();
         private RepositoryReaderGenerator _repositoryReaderGenerator = new RepositoryReaderGenerator();
         private RepositoryUnitTestGenerator _repositoryUnitTestGenerator = new RepositoryUnitTestGenerator();
         private BaseGeneratorEntity _activeEntity;

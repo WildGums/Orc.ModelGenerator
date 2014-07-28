@@ -8,8 +8,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
         {
             var properties = GetPropertiesCode(entity);
             var outputString = string.Format(
-                @"
-public class {0}
+@"public class {0}
 {{
 {1}}}
 ",

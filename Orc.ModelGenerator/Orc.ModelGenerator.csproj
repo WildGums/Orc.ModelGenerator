@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseGeneratorEntity.cs" />
     <Compile Include="EntityCodeGenerators\ClassGenerator.cs" />
-    <Compile Include="EntityCodeGenerators\CsvMapGeneratorGenerator.cs" />
+    <Compile Include="EntityCodeGenerators\CsvMapGenerator.cs" />
     <Compile Include="EntityCodeGenerators\EntityCodeGenerator.cs" />
     <Compile Include="DataFile.cs" />
     <Compile Include="DataFileType.cs" />

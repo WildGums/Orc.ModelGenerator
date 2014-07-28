@@ -10,9 +10,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
                 fileName = (entity as CsvEntity).FileName;
             }
             var outputString = string.Format(
-                @"
-
-private const string {0}sCsv = @""{1}"";
+@"private const string {0}sCsv = @""{1}"";
 public {0}[] Load{0}s()
 {{
     using (var csvReader = CreateCsvReader({0}sCsv, typeof({0}Map)))

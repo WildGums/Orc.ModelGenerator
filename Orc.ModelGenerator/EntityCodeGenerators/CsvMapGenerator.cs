@@ -2,14 +2,13 @@ using System.Text;
 
 namespace Orc.ModelGenerator.EntityCodeGenerators
 {
-    public class CsvMapGeneratorGenerator : EntityCodeGenerator
+    public class CsvMapGenerator : EntityCodeGenerator
     {
         public override string Generate(Entity entity)
         {
             var properties = GetMapRowsCode(entity);
             var outputString = string.Format(
-                @"
-public sealed class {0}Map: CsvClassMap<{0}>
+@"public sealed class {0}Map: CsvClassMap<{0}>
 {{
     public {0}Map()
     {{

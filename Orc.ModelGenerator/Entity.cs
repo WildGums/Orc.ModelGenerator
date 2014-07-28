@@ -2,10 +2,6 @@
 
 namespace Orc.ModelGenerator
 {
-    public class BaseGeneratorEntity
-    {
-        
-    }
     public class Entity : BaseGeneratorEntity
     {
         public Entity(string name)

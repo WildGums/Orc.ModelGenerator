@@ -9,7 +9,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
         {
             var properties = GetUnitTestRowsCode(entity);
             var outputString = string.Format(
-                @"[Test]
+@"[Test]
 public void Load{0}s()
 {{
     var repo = new {2}(DataFolder);
