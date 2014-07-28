@@ -23,7 +23,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
         private CsvMapGeneratorGenerator _csvMapGenerator = new CsvMapGeneratorGenerator();
         private RepositoryReaderGenerator _repositoryReaderGenerator = new RepositoryReaderGenerator();
         private RepositoryUnitTestGenerator _repositoryUnitTestGenerator = new RepositoryUnitTestGenerator();
-        private Entity _activeEntity;
+        private BaseGeneratorEntity _activeEntity;
 
         #region Fields
         #endregion
@@ -38,6 +38,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
             InputFiles = new ObservableCollection<DataFile>();
             Entities = new ObservableCollection<Entity>();
 
+            ActiveEntityChanged = new Command<BaseGeneratorEntity>(OnActiveEntityChanged);
             FileDragDrop = new Command<DragEventArgs>(OnFileDragDrop);
             FileDragEnter = new Command<DragEventArgs>(OnFileDragEnter);
             Run = new Command(OnRun);
@@ -55,7 +56,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
         public ObservableCollection<DataFile> InputFiles { get; private set; }
         public ObservableCollection<Entity> Entities { get; private set; }
 
-        public Entity ActiveEntity
+        public BaseGeneratorEntity ActiveEntity
         {
             get { return _activeEntity; }
             set
@@ -89,6 +90,7 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
 
         #region Commands
 
+        public Command<BaseGeneratorEntity> ActiveEntityChanged { get; private set; }
         public Command<DragEventArgs> FileDragDrop { get; private set; }
         public Command<DragEventArgs> FileDragEnter { get; private set; }
         public Command Run { get; private set; }
@@ -96,6 +98,10 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
         #endregion
 
         #region Methods
+        private void OnActiveEntityChanged(BaseGeneratorEntity entity)
+        {
+            ActiveEntity = entity;
+        }
 
         private void OnFileDragDrop(DragEventArgs e)
         {

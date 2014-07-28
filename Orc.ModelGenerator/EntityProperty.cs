@@ -2,7 +2,7 @@
 
 namespace Orc.ModelGenerator
 {
-    public class EntityProperty
+    public class EntityProperty : BaseGeneratorEntity
     {
         private readonly string _sourceName;
         private readonly Type _type;

@@ -40,17 +40,25 @@
                 </i:Interaction.Triggers>
             </ListBox>
             <Label Content="Entities:" />
-            <ListBox ItemsSource="{Binding Entities}" SelectedItem="{Binding ActiveEntity}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
+            <TreeView x:Name="EntityTreeView"  ItemsSource="{Binding Entities}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <catel:EventToCommand Command="{Binding ActiveEntityChanged}" CommandParameter="{Binding ElementName=EntityTreeView,Path=SelectedValue}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type modelGenerator:Entity}" ItemsSource="{Binding Properties}" >
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding Path=IsEnabled}"/>
+                            <CheckBox IsChecked="{Binding Path=IsEnabled}" Focusable="False"/>
                             <TextBlock Text="{Binding Path=Name}"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Button Content="Run!" Command="{Binding Run}"/>
+                    </HierarchicalDataTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type modelGenerator:EntityProperty}" >
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+            </TreeView>
+            <Button Content="Run!" Command="{Binding Run}" Margin="5"/>
         </catel:StackGrid>
         
         <Grid>
