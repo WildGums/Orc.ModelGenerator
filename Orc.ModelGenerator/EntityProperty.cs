@@ -7,12 +7,13 @@ namespace Orc.ModelGenerator
     {
 
         private Type _type;
+        private readonly string _testStringValue;
 
-        public EntityProperty(string name, Type type, string testValue)
+        public EntityProperty(string name, Type type, string testStringValue)
         {
             SourceName = name;
             _type = type;
-            TestValue = testValue;
+            _testStringValue = testStringValue;
             Name = GetName(CreateFieldName(name));
             PropertyType = GetPropertyType(type);
         }
@@ -43,6 +44,8 @@ namespace Orc.ModelGenerator
                 .Replace(":", "")
                 .Replace(".", "")
                 .Replace("/", "")
+                .Replace("%", "")
+                .Replace("~", "")
                 .Replace("\\", "");
         }
 
@@ -76,7 +79,30 @@ namespace Orc.ModelGenerator
             }
         }
 
-        public string TestValue { get; set; }
+        public string TestValue
+        {
+            get
+            {
+                if (PropertyType == EntityPropertyType.Int)
+                {
+                    if (_testStringValue.Contains("0") && _testStringValue.Length > 1)
+                        return _testStringValue.Substring(_testStringValue.LastIndexOf("0") + 1);
+                    return _testStringValue;
+                }
+
+                if (PropertyType == EntityPropertyType.Double) return _testStringValue;
+                if (PropertyType == EntityPropertyType.String) return string.Format(@"""{0}""", _testStringValue);
+                if (PropertyType == EntityPropertyType.DateTime)
+                {
+                    DateTime dateTime;
+                    DateTime.TryParse(_testStringValue, out dateTime);
+                    return string.Format(@"new DateTime({0}, {1}, {2})", dateTime.Year, dateTime.Month, dateTime.Day);
+                }
+                if (PropertyType == EntityPropertyType.TimeSpan) return "new TimeSpan(10,10,0)";
+                throw new Exception();
+            }
+        }
+
         public string SourceName { get; set; }
         public string Name { get; set; }
  

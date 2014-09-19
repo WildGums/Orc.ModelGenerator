@@ -13,11 +13,7 @@ namespace Orc.ModelGenerator.EntityCodeGenerators
 @"private const string {0}sCsv = @""{1}"";
 public {0}[] Load{0}s()
 {{
-    using (var csvReader = CreateCsvReader({0}sCsv, typeof({0}Map)))
-    {{
-        var records = csvReader.GetRecords<{0}>();
-        return records.ToArray();
-    }}
+    return LoadCollection<{0}>({0}sCsv, typeof({0}Map));    
 }}
 ",
                 entity.Name, fileName);

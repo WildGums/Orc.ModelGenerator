@@ -19,10 +19,11 @@ namespace Orc.ModelGenerator.DataProviders
         public override IEnumerable<Entity> Generate()
         {
             var entityName = CreateEntityName(_dataFile.FileName.Replace(".csv", string.Empty));
+            var itemCount = GetRowCount(_dataFile.FullFileName);
             using (var csvReader = CreateCsvReader(_dataFile.FullFileName))
             {
                 csvReader.Read();
-                var entity = new CsvEntity(entityName, _dataFile.FileName);
+                var entity = new CsvEntity(entityName, _dataFile.FileName, itemCount);
 
                 var headers = csvReader.FieldHeaders;
                 for (int i = 0; i < headers.Length; i++)
@@ -32,6 +33,19 @@ namespace Orc.ModelGenerator.DataProviders
                     entity.Properties.Add(new EntityProperty(header, DetectType(records), records));
                 }
                 yield return entity;
+            }
+        }
+
+        private int GetRowCount(string fullFileName)
+        {
+            using (var csvReader = CreateCsvReader(fullFileName))
+            {
+                var i = 0;
+                while (csvReader.Read())
+                {
+                    i++;
+                }
+                return i;
             }
         }
 
