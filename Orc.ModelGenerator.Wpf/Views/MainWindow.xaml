@@ -14,7 +14,7 @@
      <catel:StackGrid x:Name="LayoutRoot">
 
         <catel:StackGrid.ColumnDefinitions>
-            <ColumnDefinition Width="200px" />
+            <ColumnDefinition Width="250px" />
             <ColumnDefinition Width="250px" />
             <ColumnDefinition Width="*" />
         </catel:StackGrid.ColumnDefinitions>
@@ -28,7 +28,7 @@
                 <RowDefinition Height="35px" />
             </catel:StackGrid.RowDefinitions>
             
-            <Label Content="Files:" />
+            <Label Content="Drop files here:" />
             <ListBox ItemsSource="{Binding InputFiles}" AllowDrop="True" DisplayMemberPath="FileName">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewDrop">

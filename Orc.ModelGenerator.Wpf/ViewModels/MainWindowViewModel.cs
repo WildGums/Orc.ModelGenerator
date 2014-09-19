@@ -105,7 +105,8 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
 
         private void OnFileDragDrop(DragEventArgs e)
         {
-            foreach (var path in (string[])e.Data.GetData(DataFormats.FileDrop, false))
+            var filePaths = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
+            foreach (var path in filePaths.OrderBy(x => x))
             {
                 if (Directory.Exists(path))
                 {

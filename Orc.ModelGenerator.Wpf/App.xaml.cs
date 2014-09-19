@@ -1,4 +1,6 @@
-﻿namespace Orc.ModelGenerator.Wpf
+﻿using Catel.Logging;
+
+namespace Orc.ModelGenerator.Wpf
 {
     using System.Windows;
 
@@ -16,7 +18,9 @@
         protected override void OnStartup(StartupEventArgs e)
         {
 #if DEBUG
-            Catel.Logging.LogManager.RegisterDebugListener();
+            var debugListener = new DebugLogListener();
+            debugListener.IsDebugEnabled = false;
+            Catel.Logging.LogManager.AddListener(debugListener);
 #endif
 
             StyleHelper.CreateStyleForwardersForDefaultStyles();

@@ -29,8 +29,8 @@ namespace Orc.ModelGenerator.DataProviders
                 for (int i = 0; i < headers.Length; i++)
                 {
                     var header = headers[i];
-                    var records = csvReader.CurrentRecord[i];
-                    entity.Properties.Add(new EntityProperty(header, DetectType(records), records));
+                    var record = csvReader.CurrentRecord == null?String.Empty:csvReader.CurrentRecord[i];
+                    entity.Properties.Add(new EntityProperty(header, DetectType(record), record));
                 }
                 yield return entity;
             }
