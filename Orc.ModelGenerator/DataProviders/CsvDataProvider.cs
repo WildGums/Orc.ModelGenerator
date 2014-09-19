@@ -29,48 +29,25 @@ namespace Orc.ModelGenerator.DataProviders
                 {
                     var header = headers[i];
                     var records = csvReader.CurrentRecord[i];
-                    entity.Properties.Add(new EntityProperty(CreateFieldName(header), DetectType(records), records));
+                    entity.Properties.Add(new EntityProperty(header, DetectType(records), records));
                 }
                 yield return entity;
             }
         }
 
-        private string CreateFieldName(string header)
-        {
-            if (header.IndexOfAny(new[] {'|'}) != -1)
-            {
-                return header.Substring(0, header.IndexOfAny(new[] { '|' }));
-            }
-            return header;
-        }
 
         private Type DetectType(string stringValue)
         {
-            var expectedTypes = new List<Type> { typeof(DateTime), typeof(int), typeof(double), typeof(string) };
-            foreach (var type in expectedTypes)
-            {
-                TypeConverter converter = TypeDescriptor.GetConverter(type);
-                if (converter.CanConvertFrom(typeof(string)))
-                {
-                    try
-                    {
-                        // You'll have to think about localization here
-                        object newValue = converter.ConvertFromInvariantString(stringValue);
-                        if (newValue != null)
-                        {
-                            return type;
-                        }
-                    }
-                    catch
-                    {
-                        // Can't convert given string to this type
-                        continue;
-                    }
+            if (string.IsNullOrWhiteSpace(stringValue)) return typeof (string);
 
-                }
-            }
+            DateTime dateTimeValue;
+            if (DateTime.TryParse(stringValue, out dateTimeValue)) return typeof (DateTime);
+            int intValue;
+            if (int.TryParse(stringValue, out intValue)) return typeof (int);
+            double doubleValue;
+            if (double.TryParse(stringValue, out doubleValue)) return typeof(double);
 
-            return null;
+            return typeof (string);
         }
 
         private CsvReader CreateCsvReader(string path)

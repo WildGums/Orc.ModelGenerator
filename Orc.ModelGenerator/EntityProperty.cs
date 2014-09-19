@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Orc.ModelGenerator
 {
@@ -12,10 +13,18 @@ namespace Orc.ModelGenerator
             SourceName = name;
             _type = type;
             TestValue = testValue;
-            Name = GetName(SourceName);
+            Name = GetName(CreateFieldName(name));
             PropertyType = GetPropertyType(type);
         }
 
+        private string CreateFieldName(string header)
+        {
+            if (header.IndexOfAny(new[] { '|' }) != -1)
+            {
+                return header.Substring(0, header.IndexOfAny(new[] { '|' }));
+            }
+            return header;
+        }
         private EntityPropertyType GetPropertyType(Type type)
         {
             if (type == typeof(int)) return EntityPropertyType.Int;
@@ -28,13 +37,28 @@ namespace Orc.ModelGenerator
 
         private string GetName(string sourceName)
         {
+            sourceName = MakeCamel(sourceName);
             return sourceName.Replace("ID", "Id")
-                .Replace(" ", "")
                 .Replace("-", "")
                 .Replace(":", "")
                 .Replace(".", "")
                 .Replace("/", "")
                 .Replace("\\", "");
+        }
+
+        private string MakeCamel(string sourceName)
+        {
+            if (string.IsNullOrWhiteSpace(sourceName)) return string.Empty;
+            var parts = sourceName.Trim().Split(' ');
+            StringBuilder sb = new StringBuilder();
+            foreach (var part in parts)
+            {
+                var capital = part[0].ToString().ToUpper();
+                var rest = part.Substring(1);
+                sb.Append(capital);
+                sb.Append(rest);
+            }
+            return sb.ToString();
         }
 
         public EntityPropertyType PropertyType { get; set; }
