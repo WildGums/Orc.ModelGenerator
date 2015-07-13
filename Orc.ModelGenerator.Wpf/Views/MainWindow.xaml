@@ -19,17 +19,15 @@
             <ColumnDefinition Width="*" />
         </catel:StackGrid.ColumnDefinitions>
 
-        <catel:StackGrid>
+        <catel:StackGrid Margin="5">
             <catel:StackGrid.RowDefinitions>
-                <RowDefinition Height="30px" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="70px" />
                 <RowDefinition Height="30px" />
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="35px" />
             </catel:StackGrid.RowDefinitions>
             
-            <Label Content="Drop files here:" />
-            <ListBox ItemsSource="{Binding InputFiles}" AllowDrop="True" DisplayMemberPath="FileName">
+            <Border AllowDrop="True" BorderThickness="1" Background="WhiteSmoke">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewDrop">
                         <catel:EventToCommand Command="{Binding FileDragDrop}" PassEventArgsToCommand="True" DisableAssociatedObjectOnCannotExecute="False"/>
@@ -38,7 +36,8 @@
                         <catel:EventToCommand Command="{Binding FileDragEnter}" PassEventArgsToCommand="True" DisableAssociatedObjectOnCannotExecute="False"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-            </ListBox>
+                <TextBlock Foreground="LightGray" VerticalAlignment="Center" FontSize="20" TextAlignment="Center">Drop your csv files here</TextBlock>
+            </Border>
             <Label Content="Entities:" />
             <TreeView x:Name="EntityTreeView"  ItemsSource="{Binding Entities}">
                 <i:Interaction.Triggers>
