@@ -99,11 +99,11 @@ namespace Orc.ModelGenerator
             get
             {
                 var nullable = Nullable ? "?" : "";
-                if (PropertyType == EntityPropertyType.Int) return nullable+"int";
-                if (PropertyType == EntityPropertyType.Double) return nullable+"double";
+                if (PropertyType == EntityPropertyType.Int) return "int" + nullable;
+                if (PropertyType == EntityPropertyType.Double) return "double" + nullable;
                 if (PropertyType == EntityPropertyType.String) return "string";
-                if (PropertyType == EntityPropertyType.DateTime) return nullable+"DateTime";
-                if (PropertyType == EntityPropertyType.TimeSpan) return nullable+"TimeSpan";
+                if (PropertyType == EntityPropertyType.DateTime) return "DateTime" + nullable;
+                if (PropertyType == EntityPropertyType.TimeSpan) return "TimeSpan" + nullable;
                 return "N/A";
             }
         }
