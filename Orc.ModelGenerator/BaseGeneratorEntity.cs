@@ -1,6 +1,8 @@
-﻿namespace Orc.ModelGenerator
+﻿using Catel.Data;
+
+namespace Orc.ModelGenerator
 {
-    public class BaseGeneratorEntity
+    public class BaseGeneratorEntity : ModelBase
     {
     }
 }

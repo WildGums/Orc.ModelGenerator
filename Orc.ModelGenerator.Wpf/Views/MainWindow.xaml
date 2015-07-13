@@ -55,8 +55,7 @@
                     </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type modelGenerator:EntityProperty}" >
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Path=Name}"/>
-                            <TextBlock Text="{Binding Path=FriendlyTypeName}"/>
+                            <TextBlock Text="{Binding Path=FriendlyFullTypeName}"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>

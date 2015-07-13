@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Orc.ModelGenerator
@@ -8,6 +10,9 @@ namespace Orc.ModelGenerator
 
         private Type _type;
         private readonly string _testStringValue;
+        private EntityPropertyType _propertyType;
+        private string _name;
+        private bool _nullable;
 
         public EntityProperty(string name, Type type, string testStringValue)
         {
@@ -16,6 +21,8 @@ namespace Orc.ModelGenerator
             _testStringValue = testStringValue;
             Name = GetName(CreateFieldName(name));
             PropertyType = GetPropertyType(type);
+            ExampleValues = new Collection<string>();
+            ExampleValues.Add(testStringValue);
         }
 
         private string CreateFieldName(string header)
@@ -64,25 +71,60 @@ namespace Orc.ModelGenerator
             return sb.ToString();
         }
 
-        public EntityPropertyType PropertyType { get; set; }
+        public EntityPropertyType PropertyType
+        {
+            get { return _propertyType; }
+            set
+            {
+                if (_propertyType == value) return;
+                _propertyType = value;
+                RaisePropertyChanged(() => PropertyType);
+                RaisePropertyChanged(() => FriendlyFullTypeName);
+            }
+        }
+
+        public bool Nullable
+        {
+            get { return _nullable; }
+            set
+            {
+                if (_nullable == value) return;
+                _nullable = value;
+                RaisePropertyChanged(() => Nullable);
+                RaisePropertyChanged(() => FriendlyFullTypeName);
+            }
+        }
 
         public string FriendlyTypeName
         {
             get
             {
-                if (PropertyType == EntityPropertyType.Int) return "int";
-                if (PropertyType == EntityPropertyType.Double) return "double";
+                var nullable = Nullable ? "?" : "";
+                if (PropertyType == EntityPropertyType.Int) return nullable+"int";
+                if (PropertyType == EntityPropertyType.Double) return nullable+"double";
                 if (PropertyType == EntityPropertyType.String) return "string";
-                if (PropertyType == EntityPropertyType.DateTime) return "DateTime";
-                if (PropertyType == EntityPropertyType.TimeSpan) return "TimeSpan";
+                if (PropertyType == EntityPropertyType.DateTime) return nullable+"DateTime";
+                if (PropertyType == EntityPropertyType.TimeSpan) return nullable+"TimeSpan";
                 return "N/A";
             }
         }
 
+        public string FriendlyFullTypeName
+        {
+            get
+            {
+                return Name + " : " + FriendlyTypeName;
+            }
+        }
+        public Collection<string> ExampleValues { get; private set; } 
         public string TestValue
         {
             get
             {
+                if (Nullable && _testStringValue.Trim().Length == 0)
+                {
+                    return "null";
+                }
                 if (PropertyType == EntityPropertyType.Int)
                 {
                     if (_testStringValue.Contains("0") && _testStringValue.Length > 1)
@@ -104,8 +146,19 @@ namespace Orc.ModelGenerator
         }
 
         public string SourceName { get; set; }
-        public string Name { get; set; }
- 
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (_name == value) return;
+                _name = value;
+                RaisePropertyChanged(() => Name);
+                RaisePropertyChanged(() => FriendlyFullTypeName);
+            }
+        }
+
         public string ToCode()
         {
             return string.Format(@"    public {0} {1} {{ get; set; }}", FriendlyTypeName, Name);
