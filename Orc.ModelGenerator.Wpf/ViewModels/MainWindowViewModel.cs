@@ -110,17 +110,30 @@ namespace Orc.ModelGenerator.Wpf.ViewModels
             {
                 if (Directory.Exists(path))
                 {
-                    var files = Directory.GetFiles(path).Select(x => new DataFile(x));
-                    InputFiles.AddRange(files);
+                    foreach (var file in Directory.GetFiles(path))
+                    {
+                        ProcessInputFile(file);
+                    }
                 }
                 else
                 {
-                    var dataFile = new DataFile(path);
-                    var dataProvider = DataProvider.CreateDataProvider(dataFile);
-                    InputFiles.Add(dataFile);
-                    Entities.AddRange(dataProvider.Generate());
+                    ProcessInputFile(path);
                 }
             }
+        }
+
+        private void ProcessInputFile(string path)
+        {
+            // if the file is already processed, skip it
+            if (InputFiles.Any(x => x.FullFileName == path))
+            {
+                return;
+            }
+
+            var dataFile = new DataFile(path);
+            var dataProvider = DataProvider.CreateDataProvider(dataFile);
+            InputFiles.Add(dataFile);
+            Entities.AddRange(dataProvider.Generate());
         }
 
         private void OnFileDragEnter(DragEventArgs e)
