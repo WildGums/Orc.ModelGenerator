@@ -30,14 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Catel.Core">
-      <HintPath>..\..\lib\Catel.Core.3.9.0\lib\net45\Catel.Core.dll</HintPath>
+    <Reference Include="Catel.Core, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Catel.Core.4.2.0-unstable0189\lib\net45\Catel.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CsvHelper">
-      <HintPath>..\..\lib\CsvHelper.2.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CsvHelper.2.13.2.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
-    <Reference Include="Excel">
-      <HintPath>..\..\lib\ExcelDataReader.2.1.2.2\lib\net45\Excel.dll</HintPath>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
